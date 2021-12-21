@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+        {% block stylesheets %}
+<style>
+h2
+{
+	position: relative;
+	width: 90%;
+	font-size: 1.3em;
+	font-weight: bold;
+	padding: 7px 20px 7px 25px;
+	margin: 0 10px 25px -30px;
+	color: #555;
+	background-color: #eee;
+	text-shadow: 0px 1px 2px #bbb;
+	-webkit-box-shadow: 0px 2px 4px #888;
+	-moz-box-shadow: 0px 2px 4px #888;
+	box-shadow: 0px 2px 4px #888;
+	}
+
+h2:before, h2:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+	}
+
+/* wrap */
+h2:after {
+	left: 0px;
+	top: 100%;
+	border-width: 5px 5px;
+	border-style: solid;
+	border-color: #666 #666 transparent transparent;
+	}
+
+</style>
+{% endblock %}
+
+{% block title %}Post details{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+{% if found == false %}
+    <h1>No se ha podido encontrar el post buscado</h1>
+
+{% else %}
+    <h2>{{ title }}</h2>
+
+    <br>
+    {{ body }}
+    <br>
+    <br>
+    <h2>Autor: </h2>
+    {{ username }} : ({{ name }})
+    <br>
+    {{ email }}
+{% endif %} 
+    <br>
+    <br>
+    <a href={{ path('posts') }}>Volver al listado</a>
+</div>
+{% endblock %}

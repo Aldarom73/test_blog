@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+        {% block stylesheets %}
+
+<style>
+#lista {
+    counter-reset: li; 
+    list-style: none; 
+    *list-style: decimal; 
+    font: 15px 'trebuchet MS', 'lucida sans';
+    padding: 0;
+    margin-bottom: 4em;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+
+#lista ol {
+    margin: 0 0 0 2em; 
+}
+
+#lista li{
+    position: relative;
+    display: block;
+    padding: .4em .4em .4em .8em;
+    *padding: .4em;
+    margin: .5em 0 .5em 2.5em;
+    background: #ddd;
+    color: #444;
+    text-decoration: none;
+    transition: all .3s ease-out;   
+}
+
+#lista li:hover{
+    background: #eee;
+}   
+
+#lista li:before{
+    content: counter(li);
+    counter-increment: li;
+    position: absolute; 
+    left: -2.5em;
+    top: 50%;
+    margin-top: -1em;
+    background: #fa8072;
+    height: 2em;
+    width: 2em;
+    line-height: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#lista li:after{
+    position: absolute; 
+    content: '';
+    border: .5em solid transparent;
+    left: -1em;
+    top: 50%;
+    margin-top: -.5em;
+    transition: all .3s ease-out;               
+}
+
+#lista li:hover:after{
+    left: -.5em;
+    border-left-color: #fa8072;             
+}    
+</style>
+        {% endblock %}
+
+{% block title %}Post details{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+<h1>Lista de entradas en el blog</h1>
+{% if found == false %}
+    <h2>No se ha podido encontrar ningún post.</h2>
+
+{% else %}
+    <ol id="lista">
+    {% for entry in entries %}
+
+        <li>
+        <a href={{ path('post', { 'id': entry.id }) }}>{{ entry.title }}</a>
+        <br>
+        {{ entry.body|length > 30 ? entry.body|slice(0, 30) ~ '...' : entry.body  }}</li>
+    {% endfor %}
+    </ol>
+{% endif %} 
+</div>
+{% endblock %}
